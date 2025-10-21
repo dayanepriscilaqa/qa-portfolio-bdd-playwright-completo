@@ -27,7 +27,7 @@ jobs:
       - name: Rodar testes com Cucumber
         run: |
           mkdir -p reports
-          npx cucumber-js \
+          npx cucumber-js "features/**/*.feature" \
             --require features/support/*.js \
             --require features/step_definitions/**/*.js \
             --format html:reports/report.html \
@@ -39,3 +39,4 @@ jobs:
         with:
           name: cucumber-report
           path: reports/
+
