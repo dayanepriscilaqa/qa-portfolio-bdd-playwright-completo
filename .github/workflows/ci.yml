@@ -24,14 +24,15 @@ jobs:
       - name: Instalar Playwright e navegadores
         run: npx playwright install --with-deps
 
-      - name: Rodar testes com Cucumber
-        run: |
-          mkdir -p reports
-          npx cucumber-js "features/**/*.feature" \
-            --require features/support/*.js \
-            --require features/step_definitions/**/*.js \
-            --format html:reports/report.html \
-            --format progress
+     - name: Rodar testes com Cucumber
+  run: |
+    mkdir -p reports
+    npx cucumber-js \
+      --require features/support/*.js \
+      --require features/step_definitions/**/*.js \
+      --format html:reports/report.html \
+      --format progress \
+      features/**/*.feature
 
       - name: Upload do relatório HTML
         if: always()
