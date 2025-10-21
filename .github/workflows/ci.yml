@@ -11,12 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+
       - run: npm ci
       - run: npx playwright install --with-deps
-      - run: npm test
+
+      - name: Run Cucumber Tests
+        run: |
+          npx cucumber-js features \
+            --require ./features/support/*.js \
+            --require ./features/step_definitions/**/*.js \
+            --format html:reports/report.html \
+            --format progress
+
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
